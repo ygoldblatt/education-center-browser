@@ -1,11 +1,22 @@
-const { app, BrowserWindow, Menu, BrowserView, webContents, shell } = require('electron');
+const { app, BrowserWindow, Menu, BrowserView, webContents, shell, autoUpdater } = require('electron');
 const path = require('path');
 const ipcMain = require('electron').ipcMain;
+
+// Auto update settings
+const server = 'education-center-4ad5vf75o-ygoldblatt.vercel.app';
+const url = `${server}/update/${process.platform}/${app.getVersion()}`;
+
+autoUpdater.setFeedURL({ url });
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
 }
+
+// Check for updates to app
+setInterval(() => {
+  autoUpdater.checkForUpdates()
+}, 60000)
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
@@ -25,7 +36,7 @@ const createWindow = () => {
   });
   
 
-  // and load the index.html of the app.
+  // Load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
   mainWindow.webContents.on('did-finish-load', function() {
@@ -36,8 +47,8 @@ const createWindow = () => {
   });
 
   
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // Open DevTools
+  //mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
@@ -61,10 +72,6 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
 
 ipcMain.handle('load-webpage', (event, url) => {
   const mainWindow = BrowserWindow.getFocusedWindow();
@@ -92,7 +99,7 @@ ipcMain.handle('load-webpage', (event, url) => {
   view.setBounds({x: 0, y: 0, width: parentBounds.width, height: adjustedHeight});
   view.webContents.loadURL(url);
   console.log(view.WebContents);
-  view.webContents.openDevTools();
+  //view.webContents.openDevTools();
 
   let wc = view.webContents;
   wc.addListener('new-window', (event, url, frameName, disposition, options, additionalFeatures, referrer, postBody) => {

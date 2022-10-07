@@ -22,6 +22,19 @@
       "packagerConfig": {
         "icon": "src/icon.ico"
       },
+      "publishers": [
+        {
+          "name": "@electron-forge/publisher-github",
+          "config": {
+            "repository": {
+              "owner": "ygoldblatt",
+              "name": "education-center-browser"
+            },
+            "prerelease": false,
+            "draft": true
+          }
+        }
+      ],
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
