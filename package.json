@@ -1,0 +1,90 @@
+{
+  "name": "EducationCenter",
+  "productName": "Education Center",
+  "version": "1.3.0",
+  "description": "Custom Chronium-based web browser",
+  "main": ".webpack/main",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": {
+    "name": "Michael Bermejo",
+    "email": "mobermejo@gmail.com"
+  },
+  "license": "All rights reserved",
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "src/icon.ico"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "EducationCenter",
+            "setupMsi": "EducationCenter",
+            "noMsi": false
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ],
+      "plugins": [
+        [
+          "@electron-forge/plugin-webpack",
+          {
+            "mainConfig": "./webpack.main.config.js",
+            "renderer": {
+              "config": "./webpack.renderer.config.js",
+              "entryPoints": [
+                {
+                  "html": "./src/index.html",
+                  "js": "./src/renderer.js",
+                  "name": "main_window"
+                }
+              ]
+            }
+          }
+        ]
+      ]
+    }
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.67",
+    "@electron-forge/maker-deb": "^6.0.0-beta.54",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-zip": "^6.0.0-beta.54",
+    "@electron-forge/plugin-webpack": "6.0.0-beta.54",
+    "@marshallofsound/webpack-asset-relocator-loader": "^0.5.0",
+    "css-loader": "^4.2.1",
+    "electron": "^21.0.1",
+    "file-loader": "^6.2.0",
+    "node-loader": "^1.0.1",
+    "style-loader": "^1.2.1"
+  },
+  "dependencies": {
+    "electron-forge": "^5.2.4",
+    "electron-squirrel-startup": "^1.0.0",
+    "fomantic-ui": "^2.8.7",
+    "semantic-ui-icon": "^2.3.3",
+    "update-electron-app": "^2.0.1"
+  }
+}
