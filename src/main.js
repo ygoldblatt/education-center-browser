@@ -3,7 +3,7 @@ const path = require('path');
 const ipcMain = require('electron').ipcMain;
 
 // Auto update settings
-const server = 'education-center-4ad5vf75o-ygoldblatt.vercel.app';
+const server = 'education-center.vercel.app';
 const url = `${server}/update/${process.platform}/${app.getVersion()}`;
 
 autoUpdater.setFeedURL({ url });
