@@ -2,37 +2,14 @@ const { app, BrowserWindow, Menu, BrowserView, webContents, shell, autoUpdater }
 const path = require('path');
 const ipcMain = require('electron').ipcMain;
 
-// Auto update settings
-const server = 'education-center.vercel.app';
-const url = `${server}/update/${process.platform}/${app.getVersion()}`;
-
-autoUpdater.setFeedURL({ url });
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
 }
 
-// Check for updates to app
-setInterval(() => {
-  autoUpdater.checkForUpdates()
-}, 60000)
-
-// If updates are available, then download and install the updates
-autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
-  const dialogOpts = {
-    type: 'info',
-    buttons: ['Restart', 'Later'],
-    title: 'Application Update',
-    message: process.platform === 'win32' ? releaseNotes : releaseName,
-    detail:
-      'A new version has been downloaded. Restart the application to apply the updates.',
-  }
-
-  dialog.showMessageBox(dialogOpts).then((returnValue) => {
-    if (returnValue.response === 0) autoUpdater.quitAndInstall()
-  })
-})
+// Check for updates
+require('update-electron-app')();
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({

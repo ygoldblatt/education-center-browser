@@ -1,9 +1,13 @@
 {
   "name": "EducationCenter",
   "productName": "Education Center",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Custom Chronium-based web browser",
   "main": ".webpack/main",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ygoldblatt/education-center-browser.git"
+  },
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
