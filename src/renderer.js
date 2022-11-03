@@ -58,6 +58,13 @@ document.querySelector('#btnSecond').addEventListener('click', () => {
     getData('https://app.lomdei.net/login')
 })
 
+document.querySelector('#btnThird').addEventListener('click', () => {
+    getData('https://www.ixl.com/signin')
+})
+
+document.querySelector('#btnFourth').addEventListener('click', () => {
+    getData('https://happynumbers.com/find_class')
+})
 
 document.querySelector('#nav-back').addEventListener('click', () => {
     navigateApp('back')
