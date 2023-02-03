@@ -63,7 +63,7 @@ document.querySelector('#btnThird').addEventListener('click', () => {
 })
 
 document.querySelector('#btnFourth').addEventListener('click', () => {
-    getData('https://happynumbers.com/find_class')
+    getData('https://yby-biasyehudah.myschoolsplp.com/')
 })
 
 document.querySelector('#nav-back').addEventListener('click', () => {
