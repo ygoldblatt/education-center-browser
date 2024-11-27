@@ -91,7 +91,7 @@ ipcMain.handle('load-webpage', (event, url) => {
   mainWindow.setBrowserView(view);
   view.setBounds({x: 0, y: 0, width: parentBounds.width, height: adjustedHeight});
   view.webContents.loadURL(url);
-  console.log(view.WebContents);
+  //console.log(view.WebContents);
   //view.webContents.openDevTools();
 
   let wc = view.webContents;
@@ -105,10 +105,12 @@ ipcMain.handle('load-webpage', (event, url) => {
 ipcMain.handle('nav-app', (event, direction) => {
   const mainWindow = BrowserWindow.getFocusedWindow();
   var webView = mainWindow.getBrowserView();
-  webView.webContents.focus();
-  if (direction === 'home') {
-    webView.webContents.destroy();
-  } else if (direction === 'back') {
-    webView.webContents.goToIndex(0);
+  if (webView) {
+    webView.webContents.focus();
+    if (direction === 'home') {
+      webView.webContents.destroy();
+    } else if (direction === 'back') {
+      webView.webContents.navigationHistory.goBack();
+    }
   }
 })
