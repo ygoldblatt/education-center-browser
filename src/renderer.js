@@ -51,7 +51,7 @@ function navigateApp(direction) {
 }
 
 document.querySelector('#btnFirst').addEventListener('click', () => {
-    getData('https://login.i-ready.com/')
+    getData('https://musicalvisions.net/ck7/v5nGh4IE/')
 })
 
 document.querySelector('#btnSecond').addEventListener('click', () => {
